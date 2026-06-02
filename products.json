@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "wireless Headphones",
+    "price": 900,
+    "category": "Electronics",
+    "image":"wireless.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Running shoes",
+    "price": 1500,
+    "category": "footwear",
+    "image":"shoe.jpg"
+  },
+  {
+    "id": 3,
+    "title": "smart watch",
+    "price": 500,
+    "category": "Electronics",
+    "image": "smart.jpg"
+  }
+]
