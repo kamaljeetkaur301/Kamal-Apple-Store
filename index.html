@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    :root {
+    --primary: #6366f1;
+    --primary-dark: #4338ca;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --light: #f8fafc;
+    --white: #ffffff;
+    --dark: #1e293b;
+    --gray: #64748b;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    min-height:100vh;
+    color:var(--dark);
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 0;
+}
+
+h1{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:25px;
+    color:var(--primary-dark);
+    text-transform:capitalize;
+}
+
+/* Controls */
+
+.controls{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+}
+
+.controls input,
+.controls select{
+    flex:1;
+    min-width:220px;
+    padding:14px 16px;
+    border:2px solid #e2e8f0;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+}
+
+.controls input:focus,
+.controls select:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 10px rgba(99,102,241,.2);
+}
+
+/* Product Grid */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:25px;
+    margin-right:340px;
+}
+
+/* Product Card */
+
+.product-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.35s ease;
+    position:relative;
+}
+
+.product-card:hover{
+    transform:translateY(-10px);
+}
+
+.product-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    margin-bottom:10px;
+    font-size:1.2rem;
+}
+
+.product-info p{
+    color:var(--gray);
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.price{
+    color:var(--success);
+    font-size:1.5rem;
+    font-weight:bold;
+}
+
+.category{
+    display:inline-block;
+    margin-top:10px;
+    background:#eef2ff;
+    color:var(--primary-dark);
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:.85rem;
+}
+
+.add-btn{
+    width:100%;
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:13px;
+    margin-top:15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:var(--primary-dark);
+}
+
+/* Sidebar */
+
+.cart-sidebar{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:320px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:var(--shadow);
+    max-height:92vh;
+    overflow-y:auto;
+}
+
+.cart-sidebar h2{
+    margin-bottom:20px;
+    color:var(--primary-dark);
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    padding:10px;
+    background:#f8fafc;
+    border-radius:10px;
+}
+
+.cart-item-name{
+    font-size:14px;
+    font-weight:600;
+}
+
+.cart-item-price{
+    color:var(--success);
+    font-weight:bold;
+}
+
+.cart-total{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:2px solid #e2e8f0;
+    font-size:1.3rem;
+}
+
+#clear-cart{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    margin-top:15px;
+    background:var(--danger);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#clear-cart:hover{
+    background:#b91c1c;
+}
+
+/* Floating Cart Button */
+
+.cart-toggle{
+    display:none;
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    border:none;
+    background:var(--primary);
+    color:white;
+    font-size:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    cursor:pointer;
+}
+
+#cart-badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:red;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* Product Badge */
+
+.product-card::before{
+    content:"NEW";
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#f59e0b;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--primary);
+    border-radius:10px;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+    .product-grid{
+        margin-right:0;
+    }
+
+    .cart-sidebar{
+        position:relative;
+        width:100%;
+        right:0;
+        top:0;
+        margin-top:30px;
+    }
+}
+
+@media(max-width:768px){
+
+    h1{
+        font-size:2rem;
+    }
+
+    .controls{
+        flex-direction:column;
+    }
+
+    .cart-toggle{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <h1>product catalog</h1>
+        <!--search and filter-->
+        <div class="controls">
+            <input type="text" id="search" placeholder="search product..."/>
+            <select id="category-filter">
+            <option value="all">ALL categories</option>
+            </select>
+            <select id="sort">
+                <option value="default">Sort By</option>
+                <option value="price-low">Price:Low to High</option>
+                <option value="Price-High">Price: High to low</option>
+            </select>
+        </div>
+        <!--Product Grid-->
+        <div class="product-grid" id="products-container">
+            <!--products will be inserted here by javascript-->
+        </div>
+        <!--shopping cart sidebar-->
+        <div class="card-sidebar">
+            <h2>Your cart(<span id="cart-count">0</span>)</h2>
+            <div id="cart-items"></div>
+            <p class="cart-total">total:Rs<span id="cart-total">0.00</span></p>
+            <button id="clear-cart">clear cart</button>
+        </div>
+        <!--Cart Toggle Button (Mobile)-->
+        <button class="cart-toggle"><span    id="cart-badge">0</span></button>
+    </div>
+    <!-- <script src="script.js"></script> -->
+     <script src="script.js"></script>
+</body>
+</html>
